@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 
 <html>
-  <style>
-  div.1 { width: 50px; height: 100px }
-</style>
-  <head>
-    test123
-  </head>
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <!-- we import arjs version without NFT but with marker + location based support -->
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   <body>
-    <div class="1">
     <a-scene embedded arjs>
       <a-marker preset="hiro">
         <a-entity
@@ -22,8 +15,6 @@
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
-    </div>
-    <button>button</button>
   </body>
   
 </html>
