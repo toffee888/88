@@ -9,6 +9,7 @@
     </head>
 
     <body style="margin: 0;">
+        
         <a-scene
             vr-mode-ui="enabled: false;"
             loading-screen="enabled: false;"
@@ -16,16 +17,19 @@
             arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
             id="scene"
             embedded
-            gesture-detector
-        >
+            gesture-detector>
+            
             <a-assets>
                 <a-asset-item
                     id="animated-asset"
                     src="assets/asset.glb"
                 ></a-asset-item>
             </a-assets>
+            
 
-                <a-entity
+            <a-entity camera>
+                
+                    <a-entity
                     id="bowser-model"
                     scale="8 8 8"
                     position="0 -5 0"
@@ -33,14 +37,12 @@
                     gltf-model="#animated-asset"
                     class="clickable"
                     gesture-handler
-                    ;"
-                >
-                </a-entity>
-            
-
-            <a-entity camera></a-entity>
-        </a-scene>
+                    ;">
                       
-
+                    </a-entity>
+            </a-entity>
+                      
+        </a-scene>
+                     
     </body>
 </html>
