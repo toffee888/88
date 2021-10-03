@@ -48,7 +48,7 @@
     if (event===undefined) event= window.event;
     var target= 'target' in event? event.target : event.srcElement;
 
-    document.querySelector('a-scene').components.screenshot.getCanvas('equirectangular');
+    document.querySelector('a-scene').components.screenshot.capture('perspective');
 
 };
     </script>  
