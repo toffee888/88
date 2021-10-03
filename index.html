@@ -48,7 +48,8 @@
     if (event===undefined) event= window.event;
     var target= 'target' in event? event.target : event.srcElement;
 
-    alert('clicked on '+target.tagName);
+    document.querySelector('a-scene').components.screenshot.getCanvas('equirectangular');
+
 };
     </script>  
                       
