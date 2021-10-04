@@ -24,15 +24,27 @@
             gesture-detector
             ;>
             
-
-            <a-entity camera model-viewer="gltfModel: #rb">
-                
             <a-assets>
                 <a-asset-item
                     id="rb"
                     src="assets/asset.glb"
                 ></a-asset-item>
             </a-assets>
+            
+
+            <a-entity camera>
+                
+            <a-entity
+                    id="bowser-model"
+                    scale="1 1 1"
+                    position="0 0 -3"
+                    rotation="90 0 0"
+                    animation-mixer="loop: repeat"
+                    gltf-model="#rb"
+                    model-viewer="gltfModel: #rb"
+                    class="clickable"
+                    gesture-handler
+                ></a-entity>
                 
             </a-entity>
                       
