@@ -6,6 +6,9 @@
         <script src="aframe-extras.loaders.min.js"></script>
         <script src="gesture-detector.js"></script>
         <script src="gesture-handler.js"></script>
+        <script src="model-viewer.js"></script>
+        <script src="https://unpkg.com/aframe-extras@3.3.0/dist/aframe-extras.min.js"></script>
+        
     </head>
 
     <body style="margin: 0;">
@@ -13,15 +16,17 @@
         <a-scene
             vr-mode-ui="enabled: false;"
             loading-screen="enabled: false;"
-            renderer="logarithmicDepthBuffer: true;"
+            renderer="logarithmicDepthBuffer: true;
+                      colorManagement: true;"
             arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
             id="scene"
             embedded
-            gesture-detector>
+            gesture-detector
+            model-viewer="gltfModel: #rb";>
             
             <a-assets>
                 <a-asset-item
-                    id="animated-asset"
+                    id="rb"
                     src="assets/asset.glb"
                 ></a-asset-item>
             </a-assets>
@@ -29,10 +34,6 @@
 
             <a-entity camera>
 
-                    <a-box position="0 0 -3"> </a-box>
-                    
-
-                      
             </a-entity>
                       
         </a-scene>
