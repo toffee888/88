@@ -484,7 +484,7 @@ AFRAME.registerComponent('model-viewer', {
     var gltfObject = modelEl.getObject3D('mesh');
 
     // Reset position and scales.
-    modelEl.object3D.position.set(0, 0, -3);
+    modelEl.object3D.position.set(0, 0, -6);
     modelEl.object3D.scale.set(1.0, 1.0, 1.0);
     this.cameraRigEl.object3D.position.z = 3.0;
 
