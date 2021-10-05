@@ -486,7 +486,6 @@ AFRAME.registerComponent('model-viewer', {
     // Reset position and scales.
     modelEl.object3D.position.set(0, 0, 0);
     modelEl.object3D.scale.set(1.0, 1.0, 1.0);
-    modelE1.object3D.rotation.set(180 0 0);
     this.cameraRigEl.object3D.position.z = 3.0;
 
     // Calculate model size.
