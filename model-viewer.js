@@ -23,7 +23,12 @@ AFRAME.registerComponent('model-viewer', {
     this.onTouchMove = this.onTouchMove.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
 
+    this.submitURLButtonClicked = this.submitURLButtonClicked.bind(this);
+
     this.onThumbstickMoved = this.onThumbstickMoved.bind(this);
+
+    this.onEnterVR = this.onEnterVR.bind(this);
+    this.onExitVR = this.onExitVR.bind(this);
 
     this.onMouseDownLaserHitPanel = this.onMouseDownLaserHitPanel.bind(this);
     this.onMouseUpLaserHitPanel = this.onMouseUpLaserHitPanel.bind(this);
@@ -40,6 +45,13 @@ AFRAME.registerComponent('model-viewer', {
     this.el.sceneEl.canvas.oncontextmenu = function (evt) { evt.preventDefault(); };
 
     window.addEventListener('orientationchange', this.onOrientationChange);
+
+    // VR controls.
+    this.laserHitPanelEl.addEventListener('mousedown', this.onMouseDownLaserHitPanel);
+    this.laserHitPanelEl.addEventListener('mouseup', this.onMouseUpLaserHitPanel);
+
+    this.leftHandEl.addEventListener('thumbstickmoved', this.onThumbstickMoved);
+    this.rightHandEl.addEventListener('thumbstickmoved', this.onThumbstickMoved);
 
     // Mouse 2D controls.
     document.addEventListener('mouseup', this.onMouseUp);
@@ -59,6 +71,8 @@ AFRAME.registerComponent('model-viewer', {
 
   initUploadInput: function () {
     var uploadContainerEl = this.uploadContainerEl = document.createElement('div');
+    var inputEl = this.inputEl = document.createElement('input');
+    var submitButtonEl = this.submitButtonEl = document.createElement('button');
     var style = document.createElement('style');
     var css =
       '.a-upload-model  {box-sizing: border-box; display: inline-block; height: 34px; padding: 0; width: 70%;' +
@@ -89,6 +103,9 @@ AFRAME.registerComponent('model-viewer', {
     }
     document.getElementsByTagName('head')[0].appendChild(style);
 
+    submitButtonEl.classList.add('a-upload-model-button');
+    submitButtonEl.innerHTML = 'OPEN MODEL';
+    submitButtonEl.addEventListener('click', this.submitURLButtonClicked);
 
     inputEl.classList.add('a-upload-model-input');
     inputEl.onfocus = function () {
@@ -100,6 +117,12 @@ AFRAME.registerComponent('model-viewer', {
       this.value = inputDefaultValue;
     };
 
+    this.el.sceneEl.addEventListener('infomessageopened', function () {
+      uploadContainerEl.classList.add('hidden');
+    });
+    this.el.sceneEl.addEventListener('infomessageclosed', function () {
+      uploadContainerEl.classList.remove('hidden');
+    });
 
     inputEl.value = inputDefaultValue;
 
@@ -114,6 +137,11 @@ AFRAME.registerComponent('model-viewer', {
     this.modelEl.setAttribute('gltf-model', this.data.gltfModel);
   },
 
+  submitURLButtonClicked: function (evt) {
+    var modelURL = this.inputEl.value;
+    if (modelURL === this.inputDefaultValue) { return; }
+    this.el.setAttribute('model-viewer', 'gltfModel', modelURL);
+  },
 
   initCameraRig: function () {
     var cameraRigEl = this.cameraRigEl = document.createElement('a-entity');
@@ -212,7 +240,7 @@ AFRAME.registerComponent('model-viewer', {
 
     shadowEl.setAttribute('rotation', '-90 -30 0');
     shadowEl.setAttribute('geometry', 'primitive: plane; width: 1.0; height: 1.0');
-    shadowEl.setAttribute('material', 'src: #shadow; transparent: true; opacity: 0.0');
+    shadowEl.setAttribute('material', 'src: #shadow; transparent: true; opacity: 0.00');
     shadowEl.setAttribute('hide-on-enter-ar', '');
 
     modelPivotEl.appendChild(shadowEl);
