@@ -1,0 +1,268 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 2132,
+      "max": [
+        3.4059300422668457,
+        9.5833902359008789,
+        2.5903799533843994
+      ],
+      "min": [
+        -4.9607200622558594,
+        1.7950799465179443,
+        -2.5903799533843994
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 25584,
+      "componentType": 5126,
+      "count": 2132,
+      "max": [
+        0.99977320432662964,
+        0.99597781896591187,
+        1
+      ],
+      "min": [
+        -0.99977320432662964,
+        -0.99528533220291138,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 8904,
+      "max": [
+        2131
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 51168,
+      "componentType": 5126,
+      "count": 96,
+      "max": [
+        2.0840399265289307,
+        2.1197800636291504,
+        2.0939099788665771
+      ],
+      "min": [
+        -2.1107399463653564,
+        -0.20315000414848328,
+        -2.0939099788665771
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 52320,
+      "componentType": 5126,
+      "count": 96,
+      "max": [
+        0.99528241157531738,
+        0.99528241157531738,
+        1
+      ],
+      "min": [
+        -0.99528241157531738,
+        -0.99528241157531738,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 35616,
+      "componentType": 5125,
+      "count": 180,
+      "max": [
+        95
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "JeremyW (https://sketchfab.com/JeremyW)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/trophy-2e32184ea51d4b50968beaf48aef0d2a",
+      "title": "Trophy"
+    },
+    "generator": "Sketchfab-5.22.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 36336,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 53472,
+      "byteOffset": 36336,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 89808,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "gold",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.14014679529999999,
+          0.095235726166740253,
+          0,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.59999999999999998
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "grey",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0035131540522581662,
+          0.0035131540522581662,
+          0.0035131540522581662,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.59999999999999998
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "trophy_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0
+          },
+          "indices": 2,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "trophy_1",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 4,
+            "POSITION": 3
+          },
+          "indices": 5,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "Root"
+    },
+    {
+      "children": [
+        4,
+        5
+      ],
+      "matrix": [
+        5.7633799999999997,
+        0,
+        -0.56180000000000008,
+        0,
+        0.56180000000000008,
+        -0,
+        5.7633799999999997,
+        0,
+        0,
+        -5.7906900000000006,
+        -0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "trophy"
+    },
+    {
+      "mesh": 0,
+      "name": "trophy_0"
+    },
+    {
+      "mesh": 1,
+      "name": "trophy_1"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
+
