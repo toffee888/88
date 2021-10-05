@@ -240,7 +240,7 @@ AFRAME.registerComponent('model-viewer', {
 
     shadowEl.setAttribute('rotation', '-90 -30 0');
     shadowEl.setAttribute('geometry', 'primitive: plane; width: 1.0; height: 1.0');
-    shadowEl.setAttribute('material', 'src: #shadow; transparent: true; opacity: 0.03');
+    shadowEl.setAttribute('material', 'src: #shadow; transparent: true; opacity: 0.0');
     shadowEl.setAttribute('hide-on-enter-ar', '');
 
     modelPivotEl.appendChild(shadowEl);
@@ -248,7 +248,7 @@ AFRAME.registerComponent('model-viewer', {
     arShadowEl.setAttribute('rotation', '-90 0 0');
     arShadowEl.setAttribute('geometry', 'primitive: plane; width: 30.0; height: 30.0');
     arShadowEl.setAttribute('shadow', 'recieve: true');
-    arShadowEl.setAttribute('ar-shadows', 'opacity: 0.2');
+    arShadowEl.setAttribute('ar-shadows', 'opacity: 0.0');
     arShadowEl.setAttribute('visible', 'false');
 
     modelPivotEl.appendChild(arShadowEl);
@@ -484,7 +484,7 @@ AFRAME.registerComponent('model-viewer', {
     var gltfObject = modelEl.getObject3D('mesh');
 
     // Reset position and scales.
-    modelEl.object3D.position.set(0, 0, 0.1);
+    modelEl.object3D.position.set(0, 0, 0);
     modelEl.object3D.scale.set(1.0, 1.0, 1.0);
     this.cameraRigEl.object3D.position.z = 3.0;
 
