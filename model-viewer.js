@@ -59,24 +59,6 @@ AFRAME.registerComponent('model-viewer', {
 
   initUploadInput: function () {
 
-    if (AFRAME.utils.device.checkARSupport()) {
-      css += '@media only screen and (max-width: 800px) {' +
-      '.a-upload-model-input {width: 60%;}}';
-    }
-
-    inputEl.value = inputDefaultValue;
-
-    uploadContainerEl.appendChild(inputEl);
-    uploadContainerEl.appendChild(submitButtonEl);
-
-    this.el.sceneEl.appendChild(uploadContainerEl);
-  },
-
-  update: function () {
-    if (!this.data.gltfModel) { return; }
-    this.modelEl.setAttribute('gltf-model', this.data.gltfModel);
-  },
-
   initCameraRig: function () {
     var cameraRigEl = this.cameraRigEl = document.createElement('a-entity');
     var cameraEl = this.cameraEl = document.createElement('a-entity');
