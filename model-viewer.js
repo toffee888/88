@@ -23,9 +23,6 @@ AFRAME.registerComponent('model-viewer', {
     this.onTouchMove = this.onTouchMove.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
 
-    this.onEnterVR = this.onEnterVR.bind(this);
-    this.onExitVR = this.onExitVR.bind(this);
-
     this.onMouseDownLaserHitPanel = this.onMouseDownLaserHitPanel.bind(this);
     this.onMouseUpLaserHitPanel = this.onMouseUpLaserHitPanel.bind(this);
 
@@ -287,29 +284,6 @@ AFRAME.registerComponent('model-viewer', {
 
     this.oldHandX = intersectionPosition.x;
     this.oldHandY = intersectionPosition.y;
-  },
-
-  onEnterVR: function () {
-    var cameraRigEl = this.cameraRigEl;
-
-    this.cameraRigPosition = cameraRigEl.object3D.position.clone();
-    this.cameraRigRotation = cameraRigEl.object3D.rotation.clone();
-
-    debugger;
-    if (!this.el.sceneEl.is('ar-mode')) {
-      cameraRigEl.object3D.position.set(0, 0, 2);
-    } else {
-      cameraRigEl.object3D.position.set(0, 0, 0);
-    }
-  },
-
-  onExitVR: function () {
-    var cameraRigEl = this.cameraRigEl;
-
-    cameraRigEl.object3D.position.copy(this.cameraRigPosition);
-    cameraRigEl.object3D.rotation.copy(this.cameraRigRotation);
-
-    cameraRigEl.object3D.rotation.set(0, 0, 0);
   },
 
   onTouchMove: function (evt) {
