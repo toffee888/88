@@ -39,7 +39,6 @@ AFRAME.registerComponent('model-viewer', {
     this.initEntities();
     this.initBackground();
 
-    if (this.data.uploadUIEnabled) { this.initUploadInput(); }
 
     // Disable context menu on canvas when pressing mouse right button;
     this.el.sceneEl.canvas.oncontextmenu = function (evt) { evt.preventDefault(); };
@@ -72,13 +71,6 @@ AFRAME.registerComponent('model-viewer', {
       '.a-upload-model-input {width: 60%;}}';
     }
 
-    this.el.sceneEl.addEventListener('infomessageopened', function () {
-      uploadContainerEl.classList.add('hidden');
-    });
-    this.el.sceneEl.addEventListener('infomessageclosed', function () {
-      uploadContainerEl.classList.remove('hidden');
-    });
-
     inputEl.value = inputDefaultValue;
 
     uploadContainerEl.appendChild(inputEl);
@@ -90,12 +82,6 @@ AFRAME.registerComponent('model-viewer', {
   update: function () {
     if (!this.data.gltfModel) { return; }
     this.modelEl.setAttribute('gltf-model', this.data.gltfModel);
-  },
-
-  submitURLButtonClicked: function (evt) {
-    var modelURL = this.inputEl.value;
-    if (modelURL === this.inputDefaultValue) { return; }
-    this.el.setAttribute('model-viewer', 'gltfModel', modelURL);
   },
 
   initCameraRig: function () {
