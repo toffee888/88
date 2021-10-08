@@ -23,10 +23,6 @@ AFRAME.registerComponent('model-viewer', {
     this.onTouchMove = this.onTouchMove.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
 
-    this.submitURLButtonClicked = this.submitURLButtonClicked.bind(this);
-
-    this.onThumbstickMoved = this.onThumbstickMoved.bind(this);
-
     this.onEnterVR = this.onEnterVR.bind(this);
     this.onExitVR = this.onExitVR.bind(this);
 
