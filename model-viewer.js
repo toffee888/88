@@ -57,7 +57,6 @@ AFRAME.registerComponent('model-viewer', {
     this.modelEl.addEventListener('model-loaded', this.onModelLoaded);
   },
 
-  initUploadInput: function () {
 
   initCameraRig: function () {
     var cameraRigEl = this.cameraRigEl = document.createElement('a-entity');
