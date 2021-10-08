@@ -359,7 +359,7 @@ AFRAME.registerComponent('model-viewer', {
     // Reset position and scales.
     modelEl.object3D.position.set(0, 0, -5);
     modelEl.object3D.scale.set(0.7, 0.7, 0.7);
-    this.cameraRigEl.object3D.position.z = 3.0;
+    this.cameraRigEl.object3D.position.z = 3.1;
 
     // Calculate model size.
     modelEl.object3D.updateMatrixWorld();
