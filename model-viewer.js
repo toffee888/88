@@ -57,25 +57,7 @@ AFRAME.registerComponent('model-viewer', {
     this.modelEl.addEventListener('model-loaded', this.onModelLoaded);
   },
 
-    initUploadInput: function () {
-
-    if (AFRAME.utils.device.checkARSupport()) {
-      css += '@media only screen and (max-width: 800px) {' +
-      '.a-upload-model-input {width: 60%;}}';
-    }
-
-    inputEl.value = inputDefaultValue;
-
-    uploadContainerEl.appendChild(inputEl);
-    uploadContainerEl.appendChild(submitButtonEl);
-
-    this.el.sceneEl.appendChild(uploadContainerEl);
-  },
-
-  update: function () {
-    if (!this.data.gltfModel) { return; }
-    this.modelEl.setAttribute('gltf-model', this.data.gltfModel);
-  },
+  initUploadInput: function () {
 
   initCameraRig: function () {
     var cameraRigEl = this.cameraRigEl = document.createElement('a-entity');
@@ -377,7 +359,7 @@ AFRAME.registerComponent('model-viewer', {
     // Reset position and scales.
     modelEl.object3D.position.set(0, 0, -5);
     modelEl.object3D.scale.set(0.7, 0.7, 0.7);
-    this.cameraRigEl.object3D.position.z = 3.1;
+    this.cameraRigEl.object3D.position.z = 3.0;
 
     // Calculate model size.
     modelEl.object3D.updateMatrixWorld();
