@@ -59,6 +59,24 @@ AFRAME.registerComponent('model-viewer', {
 
   initUploadInput: function () {
 
+    if (AFRAME.utils.device.checkARSupport()) {
+      css += '@media only screen and (max-width: 800px) {' +
+      '.a-upload-model-input {width: 60%;}}';
+    }
+
+    inputEl.value = inputDefaultValue;
+
+    uploadContainerEl.appendChild(inputEl);
+    uploadContainerEl.appendChild(submitButtonEl);
+
+    this.el.sceneEl.appendChild(uploadContainerEl);
+  },
+
+  update: function () {
+    if (!this.data.gltfModel) { return; }
+    this.modelEl.setAttribute('gltf-model', this.data.gltfModel);
+  },
+
   initCameraRig: function () {
     var cameraRigEl = this.cameraRigEl = document.createElement('a-entity');
     var cameraEl = this.cameraEl = document.createElement('a-entity');
@@ -87,6 +105,18 @@ AFRAME.registerComponent('model-viewer', {
     cameraRigEl.appendChild(leftHandEl);
 
     this.el.appendChild(cameraRigEl);
+  },
+
+  initBackground: function () {
+    var backgroundEl = this.backgroundEl = document.querySelector('a-entity');
+    backgroundEl.setAttribute('geometry', {primitive: 'sphere', radius: 65});
+    backgroundEl.setAttribute('material', {
+      shader: 'background-gradient',
+      colorTop: '#37383c',
+      colorBottom: '#757575',
+      side: 'back'
+    });
+    backgroundEl.setAttribute('hide-on-enter-ar', '');
   },
 
   initEntities: function () {
@@ -186,6 +216,14 @@ AFRAME.registerComponent('model-viewer', {
     this.el.appendChild(reticleEl);
   },
 
+  onThumbstickMoved: function (evt) {
+    var modelPivotEl = this.modelPivotEl;
+    var modelScale = this.modelScale || modelPivotEl.object3D.scale.x;
+    modelScale -= evt.detail.y / 20;
+    modelScale = Math.min(Math.max(0.8, modelScale), 2.0);
+    modelPivotEl.object3D.scale.set(modelScale, modelScale, modelScale);
+    this.modelScale = modelScale;
+  },
 
   onMouseWheel: function (evt) {
     var modelPivotEl = this.modelPivotEl;
