@@ -37,6 +37,10 @@ AFRAME.registerComponent('model-viewer', {
 
     window.addEventListener('orientationchange', this.onOrientationChange);
 
+    // VR controls.
+    this.laserHitPanelEl.addEventListener('mousedown', this.onMouseDownLaserHitPanel);
+    this.laserHitPanelEl.addEventListener('mouseup', this.onMouseUpLaserHitPanel);
+
 
     // Mouse 2D controls.
     document.addEventListener('mouseup', this.onMouseUp);
@@ -72,17 +76,52 @@ AFRAME.registerComponent('model-viewer', {
     this.modelEl.setAttribute('gltf-model', this.data.gltfModel);
   },
 
+  initCameraRig: function () {
+    var cameraRigEl = this.cameraRigEl = document.createElement('a-entity');
+    var cameraEl = this.cameraEl = document.createElement('a-entity');
+    var rightHandEl = this.rightHandEl = document.createElement('a-entity');
+    var leftHandEl = this.leftHandEl = document.createElement('a-entity');
+
+    cameraEl.setAttribute('camera', {fov: 60});
+    cameraEl.setAttribute('look-controls', {
+      magicWindowTrackingEnabled: false,
+      mouseEnabled: false,
+      touchEnabled: false
+    });
+
+    rightHandEl.setAttribute('rotation', '0 90 0');
+    rightHandEl.setAttribute('laser-controls', {hand: 'right'});
+    rightHandEl.setAttribute('raycaster', {objects: '.raycastable'});
+    rightHandEl.setAttribute('line', {color: '#118A7E'});
+
+    leftHandEl.setAttribute('rotation', '0 90 0');
+    leftHandEl.setAttribute('laser-controls', {hand: 'right'});
+    leftHandEl.setAttribute('raycaster', {objects: '.raycastable'});
+    leftHandEl.setAttribute('line', {color: '#118A7E'});
+
+    cameraRigEl.appendChild(cameraEl);
+    cameraRigEl.appendChild(rightHandEl);
+    cameraRigEl.appendChild(leftHandEl);
+
+    this.el.appendChild(cameraRigEl);
+  },
 
   initEntities: function () {
     // Container for our entities to keep the scene clean and tidy.
     var containerEl = this.containerEl = document.createElement('a-entity');
     // Plane used as a hit target for laser controls when in VR mode
+    var laserHitPanelEl = this.laserHitPanelEl = document.createElement('a-entity');
     // Models are often not centered on the 0,0,0.
     // We will center the model and rotate a pivot.
     var modelPivotEl = this.modelPivotEl = document.createElement('a-entity');
     // This is our glTF model entity.
     var modelEl = this.modelEl = document.createElement('a-entity');
     // Shadow blurb for 2D and VR modes. Scaled to match the size of the model.
+    var shadowEl = this.shadowEl = document.createElement('a-entity');
+    // Real time shadow only used in AR mode.
+    var arShadowEl = this.arShadowEl = document.createElement('a-entity');
+    // The title / legend displayed above the model.
+    var titleEl = this.titleEl = document.createElement('a-entity');
     // Reticle model used to position the model in AR mode.
     var reticleEl = this.reticleEl = document.createElement('a-entity');
     // Scene ligthing.
@@ -105,11 +144,42 @@ AFRAME.registerComponent('model-viewer', {
 
     modelEl.id = 'model';
 
+    laserHitPanelEl.id = 'laserHitPanel';
+    laserHitPanelEl.setAttribute('position', '0 0 -10');
+    laserHitPanelEl.setAttribute('geometry', 'primitive: plane; width: 30; height: 20');
+    laserHitPanelEl.setAttribute('material', 'color: red');
+    laserHitPanelEl.setAttribute('visible', 'false');
+    laserHitPanelEl.classList.add('raycastable');
+
+    this.containerEl.appendChild(laserHitPanelEl);
+
     modelEl.setAttribute('rotation', '0 -30 0');
     modelEl.setAttribute('animation-mixer', '');
     modelEl.setAttribute('shadow', 'cast: true; receive: false');
 
     modelPivotEl.appendChild(modelEl);
+
+    shadowEl.setAttribute('rotation', '-90 -30 0');
+    shadowEl.setAttribute('geometry', 'primitive: plane; width: 1.0; height: 1.0');
+    shadowEl.setAttribute('material', 'src: #shadow; transparent: true; opacity: 0.001');
+    shadowEl.setAttribute('hide-on-enter-ar', '');
+
+    modelPivotEl.appendChild(shadowEl);
+
+    arShadowEl.setAttribute('rotation', '-90 0 0');
+    arShadowEl.setAttribute('geometry', 'primitive: plane; width: 30.0; height: 30.0');
+    arShadowEl.setAttribute('shadow', 'recieve: true');
+    arShadowEl.setAttribute('ar-shadows', 'opacity: 0.001');
+    arShadowEl.setAttribute('visible', 'false');
+
+    modelPivotEl.appendChild(arShadowEl);
+
+    titleEl.id = 'title';
+    titleEl.setAttribute('text', 'value: ' + this.data.title + '; width: 6');
+    titleEl.setAttribute('hide-on-enter-ar', '');
+    titleEl.setAttribute('visible', 'false');
+
+    this.containerEl.appendChild(titleEl);
 
     lightEl.id = 'light';
     lightEl.setAttribute('position', '-2 4 2');
@@ -282,6 +352,9 @@ AFRAME.registerComponent('model-viewer', {
     modelPivotEl.object3D.rotation.y -= dX / 100;
     modelPivotEl.object3D.rotation.x -= dY / 200;
 
+    // Clamp x rotation to [-90,90]
+    modelPivotEl.object3D.rotation.x = Math.min(Math.max(-Math.PI / 2, modelPivotEl.object3D.rotation.x), Math.PI / 2);
+
     this.oldClientX = evt.clientX;
     this.oldClientY = evt.clientY;
   },
@@ -348,3 +421,6 @@ AFRAME.registerComponent('model-viewer', {
     this.oldClientY = evt.clientY;
   }
 });
+© 2021 GitHub, Inc.
+Terms
+Privacy
