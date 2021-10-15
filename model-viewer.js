@@ -421,6 +421,3 @@ AFRAME.registerComponent('model-viewer', {
     this.oldClientY = evt.clientY;
   }
 });
-© 2021 GitHub, Inc.
-Terms
-Privacy
