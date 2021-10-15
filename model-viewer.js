@@ -353,7 +353,7 @@ AFRAME.registerComponent('model-viewer', {
     modelPivotEl.object3D.rotation.x -= dY / 200;
 
     // Clamp x rotation to [-90,90]
-
+    modelPivotEl.object3D.rotation.x = Math.min(Math.max(-Math.PI / 2, modelPivotEl.object3D.rotation.x), Math.PI / 2);
 
     this.oldClientX = evt.clientX;
     this.oldClientY = evt.clientY;
