@@ -354,9 +354,9 @@ AFRAME.registerComponent('model-viewer', {
     var gltfObject = modelEl.getObject3D('mesh');
 
     // Reset position and scales.
-    modelEl.object3D.position.set(0, 0, 3);
+    modelEl.object3D.position.set(0, 0, 0);
     modelEl.object3D.scale.set(0.7, 0.7, 0.7);
-    this.cameraRigEl.object3D.position.z = -3.0;
+    this.cameraRigEl.object3D.position.z = -6.0;
 
     // Calculate model size.
     modelEl.object3D.updateMatrixWorld();
