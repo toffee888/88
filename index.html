@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+    <title>AR Photo Contest</title>
     <head>
         <script src="aframe.min.js"></script>
         <script src="aframe-ar.js"></script>
@@ -14,9 +15,12 @@
         
         <a-scene
             vr-mode-ui="enabled: false;"
-            loading-screen="enabled: false;"
+            loading-screen="enabled: true;
+                            dotsColor: black; 
+                            backgroundColor: white;"
             renderer="logarithmicDepthBuffer: true;
-                      colorManagement: true;"
+                      colorManagement: true;
+                      physicallyCorrectLights: true;"
             arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;
                   sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;"
             id="scene"
