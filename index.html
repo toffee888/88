@@ -47,7 +47,8 @@
             </a-assets>
             
             <a-entity camera>
-            <a-light type="directional" position="0 0 0" rotation="-90 0 0" target="#directionaltarget">
+            <a-entity light="type: ambient; color: ##ffffff"></a-entity>
+            <a-light type="directional" position="0 0 0" rotation="0 0 0" target="#directionaltarget">
             <a-entity
                     id="directionaltarget"
                     rotation="180 45 179"
