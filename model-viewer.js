@@ -22,8 +22,6 @@ AFRAME.registerComponent('model-viewer', {
     this.onTouchMove = this.onTouchMove.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
 
-    this.onMouseDownLaserHitPanel = this.onMouseDownLaserHitPanel.bind(this);
-    this.onMouseUpLaserHitPanel = this.onMouseUpLaserHitPanel.bind(this);
 
     this.onOrientationChange = this.onOrientationChange.bind(this);
 
@@ -35,10 +33,6 @@ AFRAME.registerComponent('model-viewer', {
     this.el.sceneEl.canvas.oncontextmenu = function (evt) { evt.preventDefault(); };
 
     window.addEventListener('orientationchange', this.onOrientationChange);
-
-    // VR controls.
-    this.laserHitPanelEl.addEventListener('mousedown', this.onMouseDownLaserHitPanel);
-    this.laserHitPanelEl.addEventListener('mouseup', this.onMouseUpLaserHitPanel);
 
 
     // Mouse 2D controls.
@@ -78,8 +72,6 @@ AFRAME.registerComponent('model-viewer', {
   initCameraRig: function () {
     var cameraRigEl = this.cameraRigEl = document.createElement('a-entity');
     var cameraEl = this.cameraEl = document.createElement('a-entity');
-    var rightHandEl = this.rightHandEl = document.createElement('a-entity');
-    var leftHandEl = this.leftHandEl = document.createElement('a-entity');
 
     cameraEl.setAttribute('camera', {fov: 60});
     cameraEl.setAttribute('look-controls', {
@@ -88,19 +80,7 @@ AFRAME.registerComponent('model-viewer', {
       touchEnabled: false
     });
 
-    rightHandEl.setAttribute('rotation', '0 90 0');
-    rightHandEl.setAttribute('laser-controls', {hand: 'right'});
-    rightHandEl.setAttribute('raycaster', {objects: '.raycastable'});
-    rightHandEl.setAttribute('line', {color: '#118A7E'});
-
-    leftHandEl.setAttribute('rotation', '0 90 0');
-    leftHandEl.setAttribute('laser-controls', {hand: 'right'});
-    leftHandEl.setAttribute('raycaster', {objects: '.raycastable'});
-    leftHandEl.setAttribute('line', {color: '#118A7E'});
-
     cameraRigEl.appendChild(cameraEl);
-    cameraRigEl.appendChild(rightHandEl);
-    cameraRigEl.appendChild(leftHandEl);
 
     this.el.appendChild(cameraRigEl);
   },
@@ -108,19 +88,13 @@ AFRAME.registerComponent('model-viewer', {
   initEntities: function () {
     // Container for our entities to keep the scene clean and tidy.
     var containerEl = this.containerEl = document.createElement('a-entity');
-    // Plane used as a hit target for laser controls when in VR mode
-    var laserHitPanelEl = this.laserHitPanelEl = document.createElement('a-entity');
     // Models are often not centered on the 0,0,0.
     // We will center the model and rotate a pivot.
     var modelPivotEl = this.modelPivotEl = document.createElement('a-entity');
     // This is our glTF model entity.
     var modelEl = this.modelEl = document.createElement('a-entity');
-    // Shadow blurb for 2D and VR modes. Scaled to match the size of the model.
-    var shadowEl = this.shadowEl = document.createElement('a-entity');
     // Real time shadow only used in AR mode.
     var arShadowEl = this.arShadowEl = document.createElement('a-entity');
-    // The title / legend displayed above the model.
-    var titleEl = this.titleEl = document.createElement('a-entity');
     // Reticle model used to position the model in AR mode.
     var reticleEl = this.reticleEl = document.createElement('a-entity');
     // Scene ligthing.
@@ -143,27 +117,12 @@ AFRAME.registerComponent('model-viewer', {
 
     modelEl.id = 'model';
 
-    laserHitPanelEl.id = 'laserHitPanel';
-    laserHitPanelEl.setAttribute('position', '0 0 -10');
-    laserHitPanelEl.setAttribute('geometry', 'primitive: plane; width: 30; height: 20');
-    laserHitPanelEl.setAttribute('material', 'color: red');
-    laserHitPanelEl.setAttribute('visible', 'false');
-    laserHitPanelEl.classList.add('raycastable');
-
-    this.containerEl.appendChild(laserHitPanelEl);
 
     modelEl.setAttribute('rotation', '0 -30 0');
     modelEl.setAttribute('animation-mixer', '');
     modelEl.setAttribute('shadow', 'cast: true; receive: false');
 
     modelPivotEl.appendChild(modelEl);
-
-    shadowEl.setAttribute('rotation', '-90 -30 0');
-    shadowEl.setAttribute('geometry', 'primitive: plane; width: 1.0; height: 1.0');
-    shadowEl.setAttribute('material', 'src: #shadow; transparent: true; opacity: 0.001');
-    shadowEl.setAttribute('hide-on-enter-ar', '');
-
-    modelPivotEl.appendChild(shadowEl);
 
     arShadowEl.setAttribute('rotation', '-90 0 0');
     arShadowEl.setAttribute('geometry', 'primitive: plane; width: 30.0; height: 30.0');
@@ -172,13 +131,6 @@ AFRAME.registerComponent('model-viewer', {
     arShadowEl.setAttribute('visible', 'false');
 
     modelPivotEl.appendChild(arShadowEl);
-
-    titleEl.id = 'title';
-    titleEl.setAttribute('text', 'value: ' + this.data.title + '; width: 6');
-    titleEl.setAttribute('hide-on-enter-ar', '');
-    titleEl.setAttribute('visible', 'false');
-
-    this.containerEl.appendChild(titleEl);
 
     lightEl.id = 'light';
     lightEl.setAttribute('position', '-2 4 2');
@@ -213,23 +165,6 @@ AFRAME.registerComponent('model-viewer', {
     this.modelScale = modelScale;
   },
 
-  onMouseDownLaserHitPanel: function (evt) {
-    var cursorEl = evt.detail.cursorEl;
-    var intersection = cursorEl.components.raycaster.getIntersection(this.laserHitPanelEl);
-    if (!intersection) { return; }
-    cursorEl.setAttribute('raycaster', 'lineColor', 'white');
-    this.activeHandEl = cursorEl;
-    this.oldHandX = undefined;
-    this.oldHandY = undefined;
-  },
-
-  onMouseUpLaserHitPanel: function (evt) {
-    var cursorEl = evt.detail.cursorEl;
-    if (cursorEl === this.leftHandEl) { this.leftHandPressed = false; }
-    if (cursorEl === this.rightHandEl) { this.rightHandPressed = false; }
-    cursorEl.setAttribute('raycaster', 'lineColor', 'white');
-    if (this.activeHandEl === cursorEl) { this.activeHandEl = undefined; }
-  },
 
   onOrientationChange: function () {
     if (AFRAME.utils.device.isLandscape()) {
@@ -239,34 +174,10 @@ AFRAME.registerComponent('model-viewer', {
     }
   },
 
-  tick: function () {
-    var modelPivotEl = this.modelPivotEl;
-    var intersection;
-    var intersectionPosition;
-    var laserHitPanelEl = this.laserHitPanelEl;
-    var activeHandEl = this.activeHandEl;
-    if (!this.el.sceneEl.is('vr-mode')) { return; }
-    if (!activeHandEl) { return; }
-    intersection = activeHandEl.components.raycaster.getIntersection(laserHitPanelEl);
-    if (!intersection) {
-      activeHandEl.setAttribute('raycaster', 'lineColor', 'white');
-      return;
-    }
-    activeHandEl.setAttribute('raycaster', 'lineColor', '#007AFF');
-    intersectionPosition = intersection.point;
-    this.oldHandX = this.oldHandX || intersectionPosition.x;
-    this.oldHandY = this.oldHandY || intersectionPosition.y;
-
-    modelPivotEl.object3D.rotation.y -= (this.oldHandX - intersectionPosition.x) / 4;
-    modelPivotEl.object3D.rotation.x += (this.oldHandY - intersectionPosition.y) / 4;
-
-    this.oldHandX = intersectionPosition.x;
-    this.oldHandY = intersectionPosition.y;
-  },
 
   onTouchMove: function (evt) {
     if (evt.touches.length === 1) { this.onSingleTouchMove(evt); }
-    if (evt.touches.length === 2) { this.onPinchMove(evt); }
+    if (evt.touches.length === 2) { this.dragModel(evt); }
   },
 
   onSingleTouchMove: function (evt) {
@@ -350,7 +261,6 @@ AFRAME.registerComponent('model-viewer', {
     var center;
     var scale;
     var modelEl = this.modelEl;
-    var shadowEl = this.shadowEl;
     var gltfObject = modelEl.getObject3D('mesh');
 
     // Reset position and scales.
@@ -375,12 +285,6 @@ AFRAME.registerComponent('model-viewer', {
     box = new THREE.Box3().setFromObject(gltfObject);
     center = box.getCenter(new THREE.Vector3());
     size = box.getSize(new THREE.Vector3());
-
-    shadowEl.object3D.scale.y = size.x;
-    shadowEl.object3D.scale.x = size.y;
-    shadowEl.object3D.position.y = -size.y / 2;
-    shadowEl.object3D.position.z = -center.z;
-    shadowEl.object3D.position.x = -center.x;
 
     modelEl.object3D.position.x = -center.x;
     modelEl.object3D.position.y = -center.y;
