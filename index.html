@@ -47,9 +47,9 @@
             </a-assets>
             
             <a-entity camera>
-                
+            <a-light type="directional" position="0 0 0" rotation="-90 0 0" target="#directionaltarget">
             <a-entity
-                    id="1"
+                    id="directionaltarget"
                     rotation="180 45 179"
                     position="0 3.5 -5"
                     animation-mixer="loop: repeat"
@@ -57,7 +57,7 @@
                     gesture-handler
 
                 ></a-entity>
-
+            </a-light>    
             </a-entity>
                       
         </a-scene>
