@@ -35,6 +35,11 @@
                     src="assets/trophy.glb"
                 ></a-asset-item>
                 
+                <a-asset-item
+                    id="banner"
+                    src="assets/banner.glb"
+                ></a-asset-item>
+                
             </a-assets>
             
             <a-entity light="type: ambient; color: #FFF; intensity:10"></a-entity>
@@ -55,7 +60,18 @@
                     gesture-handler
 
                 ></a-entity>
-            </a-light>    
+            </a-light>
+                
+            <a-light type="directional" position="0 0 0" rotation="0 0 0" target="#target1">
+            <a-entity
+                    id="target1"
+                    rotation="0 0 0"
+                    position="0 6.5 -5"
+                    scale="0.2904328751566968 0.2904328751566968 0.2904328751566968"
+                    gltf-model="#banner"
+                ></a-entity>
+            </a-light>
+                
             </a-entity>
                       
         </a-scene>
