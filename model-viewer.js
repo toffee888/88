@@ -160,7 +160,7 @@ AFRAME.registerComponent('model-viewer', {
 
     shadowEl.setAttribute('rotation', '-90 -30 0');
     shadowEl.setAttribute('geometry', 'primitive: plane; width: 1.0; height: 1.0');
-    shadowEl.setAttribute('material', 'src: #shadow; transparent: true; opacity: 0.001');
+    shadowEl.setAttribute('material', 'src: #shadow; transparent: true; opacity: 1');
     shadowEl.setAttribute('hide-on-enter-ar', '');
 
     modelPivotEl.appendChild(shadowEl);
