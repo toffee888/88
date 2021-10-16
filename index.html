@@ -41,20 +41,12 @@
                 ></a-asset-item>
                 
             </a-assets>
-            
-            <a-entity light="type: ambient; color: #FFF; intensity:10"></a-entity>
-            <a-entity light="type: directional; color: #EEE; intensity:10"; position="-1 1 0"></a-entity>
-            <a-entity light="type: directional; color: #EEE; intensity:10"; position="-1 0 0"></a-entity>
-            <a-entity light="type: directional; color: #EEE; intensity:10"; position="1 0 0"></a-entity>
-            <a-entity light="type: hemisphere; color: #FFF; groundColor: #FFF; intensity: 10"></a-entity>
 
             
             <a-entity camera>
             
-            <a-entity gltf-model="url(assets/banner.glb)" position="0 2 -2.5"></a-entity>
                 
                 
-            <a-light type="directional" position="0 0 0" rotation="0 0 0" target="#directionaltarget">
             <a-entity
                     id="directionaltarget"
                     rotation="180 45 179"
@@ -64,7 +56,6 @@
                     gesture-handler
 
                 ></a-entity>
-            </a-light>
                 
 
             </a-entity>
