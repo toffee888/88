@@ -109,7 +109,7 @@ AFRAME.registerComponent('model-viewer', {
 
     modelPivotEl.appendChild(modelEl);
 
-    arShadowEl.setAttribute('rotation', '-90 0 0');
+    arShadowEl.setAttribute('rotation', '0 0 0');
     arShadowEl.setAttribute('geometry', 'primitive: plane; width: 30.0; height: 30.0');
     arShadowEl.setAttribute('shadow', 'recieve: true');
     arShadowEl.setAttribute('ar-shadows', 'opacity: 1');
