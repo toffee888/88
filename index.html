@@ -29,15 +29,6 @@
             ;>
             
             <a-assets>
-                <a-asset-item
-                    id="ic"
-                    src="assets/icecream.glb"
-                ></a-asset-item>
-                
-                <a-asset-item
-                    id="rb"
-                    src="assets/asset.glb"
-                ></a-asset-item>
                 
                 <a-asset-item
                     id="trophy"
@@ -46,8 +37,10 @@
                 
             </a-assets>
             
-            <a-entity camera>
             <a-entity light="type: ambient; color: ##ffffff; intensity:1"></a-entity>
+            <a-entity light="type: directional; color: #EEE; intensity: 0.5" position="-1 1 0"></a-entity>
+            
+            <a-entity camera>
             <a-light type="directional" position="0 0 0" rotation="0 0 0" target="#directionaltarget">
             <a-entity
                     id="directionaltarget"
