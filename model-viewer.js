@@ -103,7 +103,7 @@ AFRAME.registerComponent('model-viewer', {
     modelEl.id = 'model';
 
 
-    modelEl.setAttribute('rotation', '0 -30 0');
+    modelEl.setAttribute('rotation', '90 -30 0');
     modelEl.setAttribute('animation-mixer', '');
     modelEl.setAttribute('shadow', 'cast: true; receive: false');
 
