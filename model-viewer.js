@@ -280,8 +280,8 @@ AFRAME.registerComponent('model-viewer', {
   },
 
   onMouseDown: function (evt) {
-    this.oldClientX = evt.touches[3].clientX;
-    this.oldClientY = evt.touches[3].clientY;
+    this.oldClientX = evt.touches[0].clientX;
+    this.oldClientY = evt.touches[0].clientY;
   }
   
     
