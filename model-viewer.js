@@ -289,24 +289,6 @@ AFRAME.registerComponent('model-viewer', {
     this.oldClientY = evt.touches[0].clientY;
   },
 
-  onPinchMove: function (evt) {
-    var dX = evt.touches[0].clientX - evt.touches[1].clientX;
-    var dY = evt.touches[0].clientY - evt.touches[1].clientY;
-    var modelPivotEl = this.modelPivotEl;
-    var distance = Math.sqrt(dX * dX + dY * dY);
-    var oldDistance = this.oldDistance || distance;
-    var distanceDifference = oldDistance - distance;
-    var modelScale = this.modelScale || modelPivotEl.object3D.scale.x;
-
-    modelScale -= distanceDifference / 500;
-    modelScale = Math.min(Math.max(0.8, modelScale), 2.0);
-    // Clamp scale.
-    modelPivotEl.object3D.scale.set(modelScale, modelScale, modelScale);
-
-    this.modelScale = modelScale;
-    this.oldDistance = distance;
-  },
-
   onTouchEnd: function (evt) {
     this.oldClientX = undefined;
     this.oldClientY = undefined;
@@ -369,11 +351,10 @@ AFRAME.registerComponent('model-viewer', {
     var scale;
     var modelEl = this.modelEl;
     var shadowEl = this.shadowEl;
-    var titleEl = this.titleEl;
     var gltfObject = modelEl.getObject3D('mesh');
 
     // Reset position and scales.
-    modelEl.object3D.position.set(0, 0, -5);
+    modelEl.object3D.position.set(0, 0, 0);
     modelEl.object3D.scale.set(0.7, 0.7, 0.7);
     this.cameraRigEl.object3D.position.z = 3.0;
 
@@ -400,11 +381,6 @@ AFRAME.registerComponent('model-viewer', {
     shadowEl.object3D.position.y = -size.y / 2;
     shadowEl.object3D.position.z = -center.z;
     shadowEl.object3D.position.x = -center.x;
-
-    titleEl.object3D.position.x = 2.2 - center.x;
-    titleEl.object3D.position.y = size.y + 0.5;
-    titleEl.object3D.position.z = -2;
-    titleEl.object3D.visible = true;
 
     modelEl.object3D.position.x = -center.x;
     modelEl.object3D.position.y = -center.y;
