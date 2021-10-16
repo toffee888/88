@@ -280,7 +280,6 @@ AFRAME.registerComponent('model-viewer', {
   },
 
   onMouseDown: function (evt) {
-    if (evt.buttons) { this.leftRightButtonPressed = evt.buttons === 3; }
     this.oldClientX = evt.clientX;
     this.oldClientY = evt.clientY;
   }
