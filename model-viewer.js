@@ -161,7 +161,7 @@ AFRAME.registerComponent('model-viewer', {
 
 
   onTouchMove: function (evt) {
-    if (evt.touches.length === 1) { this.onSingleTouchMove(evt); }
+    if (evt.touches.length === 1) { this.onMouseEnter(evt); this.onSingleTouchMove(evt); }
   },
 
   onSingleTouchMove: function (evt) {
@@ -279,19 +279,20 @@ AFRAME.registerComponent('model-viewer', {
   },
 
   onMouseDown: function (evt) {
-    this.oldClientX = evt.touches[0].clientX;
-    this.oldClientY = evt.touches[0].clientY;
+    if (evt.buttons) { this.leftRightButtonPressed = evt.buttons === 3; }
+    this.oldClientX = evt.clientX;
+    this.oldClientY = evt.clientY;
   }
   
     
 });
 
 AFRAME.registerComponent('move', {
+
       init: function () {
 
-      this.el.addEventListener('click', function (evt) {
-      this.oldClientX = evt.touches[0].clientX;
-      this.oldClientY = evt.touches[0].clientY;
+      this.el.addEventListener('mouseenter', onMouseEnter: function (evt) {
+      this.dragModel(evt);
       });
       }
       });
