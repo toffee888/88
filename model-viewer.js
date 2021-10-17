@@ -231,7 +231,7 @@ AFRAME.registerComponent('model-viewer', {
     if (!this.oldClientX) { return; }
     dX = this.oldClientX - evt.touch[0].clientX;
     dY = this.oldClientY - evt.touch[0].clientY;
-    modelPivotEl.object3D.position.y += dY / 200;
+    modelPivotEl.object3D.position.y -= dY / 200;
     modelPivotEl.object3D.position.x -= dX / 200;
     this.oldClientX = evt.clientX;
     this.oldClientY = evt.clientY;
