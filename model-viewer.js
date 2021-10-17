@@ -297,9 +297,10 @@ AFRAME.registerComponent('model-viewer', {
     this.oldClientY = evt.clientY;
   },
   
-      this.el.addEventListener('click', function (evt) {
+  onMouseEnter: function (evt) {
+      this.el.addEventListener('mouseenter', function (evt) {
       this.dragModel2(evt);
-  }
-  
-});
+      })
+    }
+})
 
