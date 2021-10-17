@@ -161,7 +161,8 @@ AFRAME.registerComponent('model-viewer', {
 
 
   onTouchMove: function (evt) {
-    if (evt.touches.length === 1) { this.onMouseEnter(evt); this.onSingleTouchMove(evt); }
+    if (evt.touches.length === 1) { this.onSingleTouchMove(evt); }
+    if (evt.touches.length === 2) { this.onMouseEnter(evt); }
   },
 
   onSingleTouchMove: function (evt) {
