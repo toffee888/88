@@ -300,7 +300,7 @@ AFRAME.registerComponent('model-viewer', {
   
   onMouseEnter: function (evt) {
       this.el.addEventListener('mouseenter', function (evt) {
-      this.dragModel2(evt);
+      alert("hello");
       })
     }
 })
