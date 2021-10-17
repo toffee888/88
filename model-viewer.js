@@ -111,6 +111,7 @@ AFRAME.registerComponent('model-viewer', {
     modelEl.setAttribute('rotation', '0 -30 0');
     modelEl.setAttribute('animation-mixer', '');
     modelEl.setAttribute('shadow', 'cast: true; receive: false');
+    modelEl.setAttribute('class', 'clickable');
 
     modelPivotEl.appendChild(modelEl);
 
