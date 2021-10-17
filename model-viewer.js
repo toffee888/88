@@ -282,17 +282,13 @@ AFRAME.registerComponent('model-viewer', {
     if (evt.buttons) { this.leftRightButtonPressed = evt.buttons === 3; }
     this.oldClientX = evt.clientX;
     this.oldClientY = evt.clientY;
-  }
+  },
   
-    
-});
-
-AFRAME.registerComponent('move', {
-
-      init: function () {
+  onMouseEnter: function (evt) {
       this.el.addEventListener('mouseenter', function (evt) {
       this.dragModel(evt);
       });
-      }
-      });
+  }
+  
+});
 
