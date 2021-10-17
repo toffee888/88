@@ -5,6 +5,11 @@ AFRAME.registerComponent('model-viewer', {
     uploadUIEnabled: {default: true}
   },
   init: function () {
+    
+      this.el.addEventListener('click', function (evt) {
+      alert("hello");
+      });
+    
     var el = this.el;
 
     el.setAttribute('renderer', {colorManagement: true});
@@ -298,10 +303,5 @@ AFRAME.registerComponent('model-viewer', {
     this.oldClientY = evt.clientY;
   },
   
-  onMouseEnter: function (evt) {
-      this.el.addEventListener('mouseenter', function (evt) {
-      alert("hello");
-      })
-    }
 })
 
