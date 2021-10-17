@@ -225,6 +225,8 @@ AFRAME.registerComponent('model-viewer', {
    dragModel2: function (evt) {
     var dX;
     var dY;
+    this.oldClientX = this.oldClientX || evt.touches[0].clientX;
+    this.oldClientY = this.oldClientY || evt.touches[0].clientY;
     var modelPivotEl = this.modelPivotEl;
     if (!this.oldClientX) { return; }
     dX = this.oldClientX - evt.touch[0].clientX;
