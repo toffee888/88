@@ -6,10 +6,6 @@ AFRAME.registerComponent('model-viewer', {
   },
   init: function () {
     
-      this.el.addEventListener('click', function (evt) {
-      alert("hello");
-      });
-    
     var el = this.el;
 
     el.setAttribute('renderer', {colorManagement: true});
@@ -112,6 +108,7 @@ AFRAME.registerComponent('model-viewer', {
     modelEl.setAttribute('animation-mixer', '');
     modelEl.setAttribute('shadow', 'cast: true; receive: false');
     modelEl.setAttribute('class', 'clickable');
+    modelEl.setAttribute('clickhandler');
 
     modelPivotEl.appendChild(modelEl);
 
@@ -168,7 +165,7 @@ AFRAME.registerComponent('model-viewer', {
 
   onTouchMove: function (evt) {
     if (evt.touches.length === 1) { this.onSingleTouchMove(evt); }
-    if (evt.touches.length === 2) { this.onMouseEnter(evt); }
+    if (evt.touches.length === 2) { this.dragModel2(evt); }
   },
 
   onSingleTouchMove: function (evt) {
