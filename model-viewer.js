@@ -228,12 +228,15 @@ AFRAME.registerComponent('model-viewer', {
     this.oldClientX = this.oldClientX || evt.touches[0].clientX;
     this.oldClientY = this.oldClientY || evt.touches[0].clientY;
     var modelPivotEl = this.modelPivotEl;
-    dX = this.oldClientX - evt.touch[0].clientX;
-    dY = this.oldClientY - evt.touch[0].clientY;
+     
+    dX = this.oldClientX - evt.touches[0].clientX;
+    dY = this.oldClientY - evt.touches[0].clientY;
+     
     modelPivotEl.object3D.position.y += dY / 200;
+    this.oldClientY = evt.touches[0].clientY;
     modelPivotEl.object3D.position.x -= dX / 200;
-    this.oldClientX = evt.touch[0].clientX;
-    this.oldClientY = evt.touch[0].clientY;
+    this.oldClientX = evt.touches[0].clientX;
+
   },
 
   rotateModel: function (evt) {
