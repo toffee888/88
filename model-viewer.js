@@ -9,7 +9,7 @@ AFRAME.registerComponent('model-viewer', {
     var el = this.el;
 
     el.setAttribute('renderer', {colorManagement: true});
-    el.setAttribute('cursor', {rayOrigin: 'mouse', fuse: false});
+    el.setAttribute('cursor', {rayOrigin: 'mouse', fuse: false, raycaster:'objects: .clickable'});
     el.setAttribute('webxr', {optionalFeatures: 'hit-test, local-floor'});
     el.setAttribute('raycaster', {objects: '.raycastable'});
 
@@ -302,4 +302,12 @@ AFRAME.registerComponent('model-viewer', {
   },
   
 })
+
+AFRAME.registerComponent('clickhandler', {
+  init: function () {
+    this.el.addEventListener('click', function (evt) {
+    alert("hello");
+    });
+  }
+});
 
