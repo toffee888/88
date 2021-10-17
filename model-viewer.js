@@ -301,7 +301,7 @@ AFRAME.registerComponent('model-viewer', {
     this.oldClientY = evt.clientY;
   },
   
-})
+});
 
 AFRAME.registerComponent('clickhandler', {
   init: function () {
