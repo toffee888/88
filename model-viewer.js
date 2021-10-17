@@ -162,7 +162,6 @@ AFRAME.registerComponent('model-viewer', {
 
   onTouchMove: function (evt) {
     if (evt.touches.length === 1) { this.onSingleTouchMove(evt); }
-    if (evt.touches.length === 3) { this.onMouseDown(evt); }
   },
 
   onSingleTouchMove: function (evt) {
@@ -286,3 +285,14 @@ AFRAME.registerComponent('model-viewer', {
   
     
 });
+
+AFRAME.registerComponent('move', {
+      init: function () {
+
+      this.el.addEventListener('click', function (evt) {
+      this.oldClientX = evt.touches[0].clientX;
+      this.oldClientY = evt.touches[0].clientY;
+      });
+      }
+      });
+
