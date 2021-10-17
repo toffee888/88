@@ -217,6 +217,19 @@ AFRAME.registerComponent('model-viewer', {
     this.oldClientX = evt.clientX;
     this.oldClientY = evt.clientY;
   },
+  
+   dragModel2: function (evt) {
+    var dX;
+    var dY;
+    var modelPivotEl = this.modelPivotEl;
+    if (!this.oldClientX) { return; }
+    dX = this.oldClientX - evt.touch[0].clientX;
+    dY = this.oldClientY - evt.touch[0].clientY;
+    modelPivotEl.object3D.position.y += dY / 200;
+    modelPivotEl.object3D.position.x -= dX / 200;
+    this.oldClientX = evt.clientX;
+    this.oldClientY = evt.clientY;
+  },
 
   rotateModel: function (evt) {
     var dX;
@@ -286,7 +299,7 @@ AFRAME.registerComponent('model-viewer', {
   
   onMouseEnter: function (evt) {
       this.el.addEventListener('mouseenter', function (evt) {
-      this.dragModel(evt);
+      this.dragModel2(evt);
       });
   }
   
