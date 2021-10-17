@@ -290,10 +290,10 @@ AFRAME.registerComponent('model-viewer', {
 AFRAME.registerComponent('move', {
 
       init: function () {
-
-      this.el.addEventListener('mouseenter', onMouseEnter: function (evt) {
+      onMouseEnter: function (evt) {
       this.dragModel(evt);
-      });
+      }
+      this.el.addEventListener('mouseenter', onMouseEnter);
       }
       });
 
